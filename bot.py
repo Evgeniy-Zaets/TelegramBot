@@ -31,8 +31,9 @@ def send_text(message):
         bot.send_message(message.chat.id, 'Какой город интересует?')
         @bot.message_handler(content_types=["text"])
         def handle_text(message):
-            bot.send_message(message.chat.id, weather.Weather.get_weather(message.text, open_weather_token),
-                             reply_markup=types.ReplyKeyboardRemove(), parse_mode="Markdown")
+            msg = bot.send_message(message.chat.id, weather.Weather.get_weather(message.text, open_weather_token),
+                             parse_mode="Markdown")
+
 
     # Описание действий при выборе курса криптовалюты
     if message.text == 'Курс криптовалюты':
@@ -46,8 +47,7 @@ def send_text(message):
         msg = bot.send_message(message.chat.id, 'Выбери, какая криптовалюта интересует', reply_markup=markup)
         @bot.message_handler(content_types=["text"])
         def handle_text(message):
-            bot.send_message(message.chat.id, crypto.cryptocurrency(message.text), parse_mode="Markdown")
-
+            msg = bot.send_message(message.chat.id, crypto.cryptocurrency(message.text), parse_mode="Markdown")
 
 # Запускаем бота
 bot.polling(none_stop=True, interval=0)
