@@ -20,8 +20,6 @@ class Weather():
 
         try:
             data = requests.get(url).json()
-            # data = r.json()
-            # # pprint(data)
 
             # Описываем состояние погоды
             weather_description = data["weather"][0]["main" ]
