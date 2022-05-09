@@ -17,40 +17,24 @@ open_weather_token = os.environ['OPEN_WEATHER_TOKEN']
 @bot.message_handler(commands=["start"])
 def start_messages(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-    item_weather = types.InlineKeyboardButton(text = "Прогноз погоды", callback_data='weather')
-    item_currency = types.InlineKeyboardButton(text = "Курс криптовалюты", callback_data='crypto')
+    item_weather = types.InlineKeyboardButton("Прогноз погоды", callback_data='weather')
+    item_currency = types.InlineKeyboardButton("Курс криптовалюты", callback_data='crypto')
     markup.row(item_weather, item_currency)
     msg = bot.send_message(message.chat.id, 'Привет! Выбери, что тебя интересует', reply_markup=markup)
     bot.register_next_step_handler(msg, send_text)
 
-
 # Получение сообщений от юзера
 def send_text(message):
-    # Описание действий при выборе прогноза погоды
-    if message.text == 'Прогноз погоды' :
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-        item_back = types.InlineKeyboardButton(text="Вернуться в главное меню", callback_data='back')
-        markup.row(item_back)
-        msg = bot.send_message(message.chat.id, 'Какой город интересует?', reply_markup=markup)
-        @bot.message_handler(content_types=["text"])
-        def handle_text(message):
-            # if not message.text.isdigit():
-            if message.text == 'Вернуться в главное меню':
-                start_messages(message)
-            else:
-                bot.send_message(message.chat.id, weather.Weather.get_weather(message.text, open_weather_token),
-                                 parse_mode="Markdown")
-
     # Описание действий при выборе курса криптовалюты
     if message.text == 'Курс криптовалюты':
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-        item_btc = types.InlineKeyboardButton(text = "BTC", callback_data='btc')
-        item_eth = types.InlineKeyboardButton(text = "ETH", callback_data='eth')
-        item_bnb = types.InlineKeyboardButton(text = "BNB", callback_data='bnb')
-        item_ape = types.InlineKeyboardButton(text = "APE", callback_data='ape')
-        item_gmt = types.InlineKeyboardButton(text = "GMT", callback_data='gmt')
-        item_usdt = types.InlineKeyboardButton(text = "USDT", callback_data='usdt')
-        item_back = types.InlineKeyboardButton (text="Вернуться в главное меню", callback_data='back')
+        item_btc = types.InlineKeyboardButton("BTC", callback_data='btc')
+        item_eth = types.InlineKeyboardButton("ETH", callback_data='eth')
+        item_bnb = types.InlineKeyboardButton("BNB", callback_data='bnb')
+        item_ape = types.InlineKeyboardButton("APE", callback_data='ape')
+        item_gmt = types.InlineKeyboardButton("GMT", callback_data='gmt')
+        item_usdt = types.InlineKeyboardButton("USDT", callback_data='usdt')
+        item_back = types.InlineKeyboardButton ("Вернуться в главное меню", callback_data='back')
         markup.row(item_btc, item_eth, item_gmt)
         markup.row(item_bnb, item_ape, item_usdt)
         markup.row(item_back)
@@ -60,7 +44,21 @@ def send_text(message):
             if message.text == 'Вернуться в главное меню':
                 start_messages(message)
             else:
-                bot.send_message(message.chat.id, crypto.cryptocurrency(message.text), parse_mode="Markdown")
-
+                print("крипта")
+                bot.send_message(message.chat.id, crypto.cryptocurrency(message.text.upper()), parse_mode="Markdown")
+    # Описание действий при выборе прогноза погоды
+    if message.text == 'Прогноз погоды':
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+        item_back = types.InlineKeyboardButton("Вернуться в главное меню", callback_data='back')
+        markup.row(item_back)
+        msg = bot.send_message(message.chat.id, 'Какой город интересует?', reply_markup=markup)
+        @bot.message_handler(content_types=["text"])
+        def handle_text(message):
+            if message.text == 'Вернуться в главное меню':
+                start_messages(message)
+            else:
+                print("прогноз")
+                bot.send_message(message.chat.id, weather.Weather.get_weather(message.text, open_weather_token),
+                                 parse_mode="Markdown")
 # Запускаем бота
 bot.polling(none_stop=True, interval=0)

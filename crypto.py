@@ -4,7 +4,8 @@ import datetime
 
 def cryptocurrency(crypto):
     """Функция предоставляет информацию о курсе криптовалюты"""
-    url = f"https://min-api.cryptocompare.com/data/pricemulti?fsyms={crypto}&tsyms=USD,EUR,UAH"
+    curr = ('USD,EUR,UAH,PLN')
+    url = f"https://min-api.cryptocompare.com/data/pricemulti?fsyms={crypto}&tsyms={curr}"
     responce = requests.get(url).json()
     try:
         if(responce["Response"] == "Error"):
@@ -12,7 +13,8 @@ def cryptocurrency(crypto):
     except KeyError:
         for res in responce:
             if res == crypto:
-                return  f"*Курс {crypto} на {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}\n*" \
+                for i in responce[crypto]:
+                   return f"*Курс {crypto} на {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}*\n" \
                         f"USD: {responce[res]['USD']}\n" \
                         f"EUR: {responce[res]['EUR']}\n" \
                         f"UAH: {responce[res]['UAH']}"
