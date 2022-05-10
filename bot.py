@@ -12,8 +12,8 @@ dotenv_file = os.path.join(BASE_DIR, '.env')
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
-bot = telebot.TeleBot(os.environ['TOKEN_BOT'])
-open_weather_token = os.environ['OPEN_WEATHER_TOKEN']
+bot = telebot.TeleBot("5150954661:AAG_APsnKkm2BCSfpwtVGxWrVkGm5JnRac8")
+open_weather_token = "e93da20f31f2d2ae6af3a45550e581fa"
 
 
 # Функция, обрабатывающая команду /start
