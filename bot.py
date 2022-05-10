@@ -18,7 +18,7 @@ open_weather_token = "e93da20f31f2d2ae6af3a45550e581fa"
 @bot.message_handler(commands=["start"])
 def start_messages(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-    item_weather = types.InlineKeyboardButton("☀ Прогноз погоды", callback_data='weather')
+    item_weather = types.InlineKeyboardButton("🌤 Прогноз погоды", callback_data='weather')
     item_currency = types.InlineKeyboardButton("₿ Курс криптовалюты", callback_data='crypto')
     markup.row(item_weather, item_currency)
     msg = bot.send_message(message.chat.id, f'Привет, {message.from_user.first_name}!\n'
@@ -27,7 +27,7 @@ def start_messages(message):
 
 # Проверяем выбранный раздел и определяем следующий шаг
 def send_message(message):
-    if message.text == "☀ Прогноз погоды":
+    if message.text == "🌤 Прогноз погоды":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
         item_back = types.InlineKeyboardButton("Вернуться в главное меню", callback_data='back')
         markup.row(item_back)
@@ -45,6 +45,8 @@ def send_message(message):
         markup.row(item_back)
         msg = bot.send_message(message.chat.id, 'Какая криптовалюта интересует?', reply_markup=markup)
         bot.register_next_step_handler(msg, crypto_handler)
+    else:
+        start_messages(message)
 
 # Функция для работы с криптовалютой
 def crypto_handler(message):
