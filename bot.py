@@ -3,8 +3,6 @@ import telebot
 from telebot import types
 import dotenv
 import weather, crypto
-import requests
-import datetime
 
 
 BASE_DIR = os.path.abspath(os.curdir)
@@ -67,4 +65,5 @@ def weather_handler(message):
         bot.register_next_step_handler(msg, weather_handler)
 
 # Запускаем бота
-bot.polling(none_stop=True, interval=0)
+if __name__ == '__main__':
+    bot.polling(none_stop=True)
