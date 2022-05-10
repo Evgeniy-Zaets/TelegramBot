@@ -50,7 +50,7 @@ def send_message(message):
 
 # Функция для работы с криптовалютой
 def crypto_handler(message):
-    if message.text == "Вернуться в главное меню":
+    if message.text == "Вернуться в главное меню" or message.text == "/start":
         start_messages(message)
     else:
         bot.send_message(message.chat.id, crypto.cryptocurrency(message.text.upper()), parse_mode="Markdown")
@@ -59,7 +59,8 @@ def crypto_handler(message):
 
 # Функция для работы с прогнозом погоды
 def weather_handler(message):
-    if message.text == "Вернуться в главное меню":
+    print(message.text)
+    if message.text == "Вернуться в главное меню" or message.text == "/start":
         start_messages(message)
     else:
         bot.send_message(message.chat.id, weather.get_weather(message.text, open_weather_token), parse_mode="Markdown")
