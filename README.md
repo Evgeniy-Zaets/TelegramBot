@@ -1,12 +1,18 @@
 # TelegramBot
-####Телеграм бот предназначен для отслеживания прогноза погоды и курса криптовалюты.  В проекте используется библиотека pyTelegramBotAPI. 
+#### Телеграм бот предназначен для отслеживания прогноза погоды и курса криптовалюты.  В проекте используется библиотека pyTelegramBotAPI.
+Deploy проекта на Heroku. Посмотреть работу бота можно здесь - <b> @info_weater_currency_bot </b>
 
 Функционал программы разделен на главный файл bot.py, который запускает программу и отвечает за работу бота, и вспомогательные файлы crypto.py и wearther.py, которые отвечают за процесс парсинга веб-сайтов.
 
-Интерфейс программы выглядит вот так:
+#### Интерфейс программы выглядит вот так:
 
+Стартовая страница:
 ![image](https://user-images.githubusercontent.com/90038547/170459335-1ff8ea12-2ebb-47f3-b682-d30c88496f6a.png)
-![image](https://user-images.githubusercontent.com/90038547/170459418-b956a5a9-2c1a-40c0-b8ef-bdcb7d49e180.png)
-![image](https://user-images.githubusercontent.com/90038547/170459480-68c52cc2-c2d5-4e19-a05e-e5bf20a96d37.png)
 
-Проект задеблоен на Heroku. Посмотреть работу телеграм-бота можно здесь - @info_weater_currency_bot
+Прогноз прогоды:
+![image](https://user-images.githubusercontent.com/90038547/170461642-615fa127-8550-4851-a298-c4497379b580.png)
+
+Курс криптовалюты:
+![image](https://user-images.githubusercontent.com/90038547/170461335-324ec91e-e74c-44fa-b867-82bfb8ba6811.png)
+
+
